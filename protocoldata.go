@@ -56,7 +56,7 @@ var protocolData = []Protocol{
 	{Proto: 52, Keyword: "i-nlsp"},
 	{Proto: 53, Keyword: "swipe (deprecated)"},
 	{Proto: 54, Keyword: "narp"},
-	{Proto: 55, Keyword: "mobile"},
+	{Proto: 55, Keyword: "min-ipv4"},
 	{Proto: 56, Keyword: "tlsp"},
 	{Proto: 57, Keyword: "skip"},
 	{Proto: 58, Keyword: "ipv6-icmp"},
