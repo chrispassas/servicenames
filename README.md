@@ -1,3 +1,6 @@
+[![GoDoc](https://pkg.go.dev/github.com/chrispassas/servicenames?status.svg)](https://pkg.go.dev/github.com/chrispassas/servicenames)
+
+
 # servicenames
 This module uses www.iana.org data to lookup protocol or service names using protocol and port numbers.
 
