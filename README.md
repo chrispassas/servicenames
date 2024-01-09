@@ -1,4 +1,4 @@
-[![GoDoc](https://pkg.go.dev/github.com/chrispassas/servicenames?status.svg)](https://pkg.go.dev/github.com/chrispassas/servicenames)
+[![GoDoc](https://godoc.org/github.com/chrispassas/servicenames?status.svg)](https://godoc.org/github.com/chrispassas/servicenames)
 
 
 # servicenames
