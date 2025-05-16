@@ -147,6 +147,8 @@ var protocolData = []Protocol{
 	{Proto: 143, Keyword: "ethernet"},
 	{Proto: 144, Keyword: "aggfrag"},
 	{Proto: 145, Keyword: "nsh"},
+	{Proto: 146, Keyword: "homa"},
+	{Proto: 147, Keyword: "bit-emu"},
 	{Proto: 253, Keyword: ""},
 	{Proto: 254, Keyword: ""},
 	{Proto: 255, Keyword: "reserved"},
