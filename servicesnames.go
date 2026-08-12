@@ -18,6 +18,12 @@ type Service struct {
 	Port        uint16 `json:"port"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	// AltServices holds other names/descriptions IANA registers for this
+	// same Protocol+Port pair (e.g. UDP/2049 is registered as both "nfs"
+	// and "shilp"). It is only populated on the primary Service returned
+	// by ServiceByProtoPort and is empty for the vast majority of ports
+	// that have a single registered name.
+	AltServices []Service `json:"alt_services,omitempty"`
 }
 
 type Protocol struct {
@@ -34,6 +40,12 @@ func New() *Services {
 
 	for _, p := range protocolData {
 		s.lookupProtocols[p.Proto] = p
+
+		// Several unassigned protocol numbers share an empty keyword.
+		// Skip them so they don't collide in the reverse lookup map.
+		if p.Keyword == "" {
+			continue
+		}
 		s.reverseLookupProtocols[p.Keyword] = p
 	}
 
@@ -42,10 +54,17 @@ func New() *Services {
 			s.lookupServices[sn.Protocol] = make(map[uint16]Service)
 		}
 
-		if _, ok := s.lookupServices[sn.Protocol][sn.Port]; !ok {
+		existing, ok := s.lookupServices[sn.Protocol][sn.Port]
+		if !ok {
 			s.lookupServices[sn.Protocol][sn.Port] = sn
+			continue
 		}
 
+		// IANA registers more than one name/description for this
+		// Protocol+Port pair. Keep the first entry as primary and stash
+		// the rest as alternates instead of silently discarding them.
+		existing.AltServices = append(existing.AltServices, sn)
+		s.lookupServices[sn.Protocol][sn.Port] = existing
 	}
 
 	return s
